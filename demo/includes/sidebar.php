@@ -17,11 +17,11 @@
           </a>
         </li>
         <li class="nav-item">
-          <a id="menu-projeler" class="nav-link text-white " href="<?= url('pages/projects.php'); ?>">
+          <a id="menu-projeler" class="nav-link text-white " href="<?= url('actions/createShipment.php'); ?>">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Projeler</span>
+            <span class="nav-link-text ms-1">Yeni Sipariş Oluştur</span>
           </a>
         </li>
           <?php if($_SESSION['user_role']==1){ ?>
@@ -30,7 +30,7 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">engineering</i>
             </div>
-            <span class="nav-link-text ms-1">Personeller</span>
+            <span class="nav-link-text ms-1">Müşteriler</span>
           </a>
         </li>
           <li class="nav-item">
@@ -42,17 +42,17 @@
               </a>
           </li>
               <li class="nav-item">
-                  <a id="menu-missions" class="nav-link text-white " href="<?=url('pages/missions.php');?>">
+                  <a id="menu-products" class="nav-link text-white " href="<?=url('pages/products.php');?>">
                       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                           <i class="material-icons opacity-10">list_alt</i>
                       </div>
-                      <span class="nav-link-text ms-1">Görevler</span>
+                      <span class="nav-link-text ms-1">Ürünler</span>
                   </a>
               </li>
           <?php }
           if($_SESSION['user_role']==0){?>
         <li class="nav-item">
-          <a id="menu-missions" class="nav-link text-white " href="<?=url('pages/missions.php');?>">
+          <a id="menu-products" class="nav-link text-white " href="<?=url('pages/products.php');?>">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">list_alt</i>
             </div>
@@ -68,7 +68,14 @@
                   <span class="nav-link-text ms-1">İşlemler</span>
               </a>
           </li>
-
+          <li class="nav-item">
+              <a id="menu-shipment" class="nav-link text-white " href="../pages/shipment.php">
+                  <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                      <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                  </div>
+                  <span class="nav-link-text ms-1">Siparişler</span>
+              </a>
+          </li>
         <!-- <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li> -->

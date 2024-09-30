@@ -27,7 +27,7 @@ if(isset($_GET['comp_id'])){
 
 }
 else{
-  $company_info=mysqli_query($connection,"SELECT * FROM companies")->fetch_all(MYSQLI_ASSOC);
+  $company_info=mysqli_query($connection,"SELECT * FROM users where user_role = 2")->fetch_all(MYSQLI_ASSOC);
 }
 //DELETE 
 if(isset($_GET['delete'])){
@@ -102,18 +102,18 @@ if(isset($_GET['delete'])){
                       <td>                             
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><?= $company["companyName"];?></h6>
+                            <h6 class="mb-0 text-sm"><?= $company["name"];?></h6>
                           </div>
                         </div>
                       </td>
                       <div class="d-flex flex-column justify-content-center">
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><?=$company['companyAddress'];?></p>
+                        <p class="text-xs font-weight-bold mb-0"><?=$company['address'];?></p>
                       </td> 
                       </div>  
                       <div class="d-flex flex-column justify-content-center">
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><?=$company['companyPhone'];?></p>
+                        <p class="text-xs font-weight-bold mb-0"><?=$company['phone'];?></p>
                       </td> 
 
                       <div class="d-flex flex-column justify-content-center">
@@ -122,7 +122,7 @@ if(isset($_GET['delete'])){
                       </td> 
                       </div>              
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><a href="../pages/projects.php?company_id=<?= $company['company_id'] ?>">İşlem Geçmişini Görüntüle</a></p>
+                        <p class="text-xs font-weight-bold mb-0"><a href="../pages/projects.php?company_id=<?= $company['user_id'] ?>">İşlem Geçmişini Görüntüle</a></p>
                       </td>
                            
                       <td class="align-middle">

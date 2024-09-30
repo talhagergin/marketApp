@@ -13,6 +13,7 @@ if(!isset($_SESSION["user_id"]))
 $loginUser=mysqli_query($connection,"SELECT * FROM users WHERE user_id = " . $_SESSION['user_id'])->fetch_assoc();
 
 $isGet=false;
+/*
 if(isset($_GET['p_id'])){
     $isGet=true;
     $the_project_id = $_GET['p_id'];
@@ -34,7 +35,10 @@ else {
        ORDER BY a.action_date DESC";
     }
     $action_info = mysqli_query($connection, $query)->fetch_all(MYSQLI_ASSOC);
-}
+}*/
+$query = "SELECT * FROM shipment s 
+          INNER JOIN users u on s.userID = u.user_id";
+$action_info = mysqli_query($connection, $query)->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +49,7 @@ else {
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    KayraSoft | İşlemler
+    İşlemler
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -82,9 +86,10 @@ else {
                 
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Proje Ad</th>
-                      <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">Kullanıcı Ad</th>
-                      <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">Yapılan İşlem</th>
+                      <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">İşlem Tipi</th>
+                      <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">Müşteri Adı</th>
+                      <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">Firma Adı</th>
+                      <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">Toplam Tutar</th>
                       <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">İşlem Tarihi</th>
                       <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">Detay Göster</th>
                     </tr>
@@ -99,29 +104,30 @@ else {
                       <td>                             
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><?= $action["project_name"];?></h6>
+                            <h6 class="mb-0 text-sm"><?= $action["actionType"];?></h6>
                           </div>
                         </div>
                       </td>
-                      <div class="d-flex flex-column justify-content-center">
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><?=$action['username'];?></p>
+                        <p class="text-xs font-weight-bold mb-0"><?=$action['name'];?></p>
                       </td> 
-                      </div>  
-                      <div class="d-flex flex-column justify-content-center">
-                      </div>
                       <div class="d-flex flex-column justify-content-center">
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><?=substr($action['action_detail'],0,30);?></p>
+                        <p class="text-xs font-weight-bold mb-0"><?=substr($action['companyName'],0,30);?></p>
                       </td> 
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><?=date('d.m.Y',strtotime($action["action_date"]));?></p>
+                        <p class="text-xs font-weight-bold mb-0"><?=$action['paidAmount'];?> ₺</p>
+                      </td> 
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0"><?=date('d.m.Y',strtotime($action["createdDate"]));?></p>
                       </td> 
                       </div>                  
                       <td>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detay-<?= $action["action_id"]; ?>">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detay-<?= $action["user_id"]; ?>">
                             Detay Göster
                         </button>
 
